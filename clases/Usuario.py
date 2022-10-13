@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, Blueprint
-from model.models import Usuarios as UsuariosModel
+from model.models import Usuarios as UsuariosModel, db
+from model.models import Roles
 
 
 class Usuario():
@@ -37,6 +38,17 @@ class Usuario():
         id_rol = request.json["id_rol"]
         new_user = UsuariosModel(
             cedula, nombres, apellidos, correo, usuario, contrasena, id_rol)
-        UsuariosModel.session.add(new_user)
-        UsuariosModel.session.commit()
+        db.session.add(new_user)
+        db.session.commit()
         return jsonify({'message': 'usuario guardado con exito'})
+
+    def editar_usuario(self, id_Usuario):
+        usuario = UsuariosModel.query.get(id_Usuario)
+        if not usuario:
+            return jsonify({'message': 'Usuario not found'})
+        else:
+            # UsuariosModel.USUARIO = request.json["USUARIO"]
+            UsuariosModel.CORREO = request.json["CORREO"]
+            UsuariosModel.CEDULA = request.json["CEDULA"]
+            db.session.commit()
+            return jsonify({'message': 'Usuario actualizado con exito'})

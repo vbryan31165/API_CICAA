@@ -39,3 +39,24 @@ class Usuarios(db.Model):
             'ESTADO': self.ESTADO,
             'FECHA_CREACION': self.FECHA_CREACION,
         }
+
+
+class Roles(db.Model):
+    ID_ROL = db.Column(db.Integer, primary_key=True)
+    ROL = db.Column(db.String(255), nullable=False)
+    ESTADO = db.Column(db.String(255), nullable=False)
+    FECHA_CREACION = db.Column(db.Integer, nullable=False, default=1)
+
+    def __init__(self, ID_ROL,ROL,ESTADO,FECHA_CREACION):
+        self.ID_ROL = ID_ROL
+        self.ROL = ROL
+        self.ESTADO = 1
+        self.FECHA_CREACION = FECHA_CREACION
+
+    def getDatos(self):
+        return {
+            'ID_ROL': self.ID_ROL,
+            'ROL': self.ROL,
+            'ESTADO': self.ESTADO,
+            'FECHA_CREACION': self.FECHA_CREACION,
+        }

@@ -3,6 +3,7 @@ from model.models import db
 from routes.routes import users
 from clases.Usuario import Usuario
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/bdcerradura'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
