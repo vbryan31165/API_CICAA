@@ -1,25 +1,42 @@
 from flask import Flask, jsonify, request, Blueprint
 from model.models import Usuarios as UsuariosModel
 
+
 class Usuario():
 
     def index(self):
         return jsonify({'message': 'welcome'})
 
-    def select_all_users(self):
-        user = UsuariosModel()
-        usuarios = UsuariosModel.query.all()
-        print(usuarios)
-        toUsers = [UsuariosModel.getDatos(user) for user in usuarios]
-        print(toUsers)
+    def select_All_Users(self):
+
+        if request.method == 'GET':
+            usuarios = UsuariosModel.query.all()
+        if not usuarios:
+            return jsonify({'message': 'no hay usuarios'})
+        else:
+            toUsers = [usuario.getDatos() for usuario in usuarios]
         return jsonify(toUsers)
 
-    def select_one_user(self, id_Usuario):
-        user = UsuariosModel()
+    def select_One_User(self, id_Usuario):
         print("entro a funcion buscar un usuario")
-        #usuario = UsuariosModel.query.filter_by(ID_USUARIO=id_Usuario).first()
-        usuario = UsuariosModel.query.get(id_Usuario)
+        usuario = UsuariosModel.query.filter_by(ID_USUARIO=id_Usuario).first()
+        #usuario = UsuariosModel.query.get(id_Usuario)
+        print("usuarios", usuario)
         if not usuario:
             return jsonify({'message': 'Usuario not found'})
         else:
-            return jsonify(UsuariosModel.getDatos())
+            return jsonify(UsuariosModel.getDatos(usuario))
+
+    def create_usuario():
+        cedula = request.json["cedula"]
+        nombres = request.json["nombres"]
+        apellidos = request.json["apellidos"]
+        correo = request.json["correo"]
+        usuario = request.json["usuario"]
+        contrasena = request.json["contrasena"]
+        id_rol = request.json["id_rol"]
+        new_user = UsuariosModel(
+            cedula, nombres, apellidos, correo, usuario, contrasena, id_rol)
+        UsuariosModel.session.add(new_user)
+        UsuariosModel.session.commit()
+        return jsonify({'message': 'usuario guardado con exito'})

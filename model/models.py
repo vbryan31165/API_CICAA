@@ -1,4 +1,3 @@
-from email.policy import default
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -16,16 +15,16 @@ class Usuarios(db.Model):
     ESTADO = db.Column(db.Integer, unique=True, nullable=False)
     FECHA_CREACION = db.Column(db.Integer, nullable=False, default=1)
 
-    # def __init__(self, ID_USUARIO, CEDULA, NOMBRES, APELLIDOS, CORREO, USUARIO, CONTRASENA, ID_ROL):
-    #     self.ID_USUARIO = ID_USUARIO
-    #     self.CEDULA = CEDULA
-    #     self.NOMBRES = NOMBRES
-    #     self.APELLIDOS = APELLIDOS
-    #     self.CORREO =CORREO
-    #     self.USUARIO = USUARIO
-    #     self.CONTRASENA = CONTRASENA
-    #     self.ID_ROL = ID_ROL
-    #     self.ESTADO = 1
+    def __init__(self, ID_USUARIO, CEDULA, NOMBRES, APELLIDOS, CORREO, USUARIO, CONTRASENA):
+        self.ID_USUARIO = ID_USUARIO
+        self.CEDULA = CEDULA
+        self.NOMBRES = NOMBRES
+        self.APELLIDOS = APELLIDOS
+        self.CORREO = CORREO
+        self.USUARIO = USUARIO
+        self.CONTRASENA = CONTRASENA
+        self.ID_ROL = 3
+        self.ESTADO = 1
 
     def getDatos(self):
         return {

@@ -1,57 +1,42 @@
 from flask import Flask, jsonify, request, Blueprint
-from model.models import Usuarios as UsuariosModel
-from clases.Usuario import Usuario
+from clases.Usuario import Usuario as usuarioClases
 
 users = Blueprint('users', __name__)
 
-user = Usuario()
+instUserClass = usuarioClases()
 
 
 @users.route('/')
 def index():
-    return Usuario.index(user)
-    # return jsonify({'message': 'welcome'})
+    return usuarioClases.index(instUserClass)
 
 
 @users.route('/usuarios')
 def usuarios():
-    return Usuario.select_all_users(user)
-    # usuarios = Usuarios.query.all()
-    # toUsers = [usuario.getDatos() for usuario in usuarios]
-    # return jsonify(toUsers)
+    return usuarioClases.select_All_Users(instUserClass)
 
 
-@users.route('/oneUsuario/<string:id_Usuario>', methods=['GET'])
-def one_Usuario(id_Usuario):
-    # print(id_Usuario)
-    # id=id_Usuario
-    # print("hugo",id)
-    #usuario = Usuarios.query.filter_by(idUsuario=idUsuario).first()
-    data=Usuario.select_one_user(id_Usuario)
-    # print(data)
-    return data
-    # usuario = Usuario.query.get(UsuariosModel)
-    # if not usuario:
-    #     return jsonify({'message': 'Usuario not found'})
-    # else:
-    #     return jsonify(usuario.getDatos())
+@users.route('/one_Usuario/<idUsuario>')
+def one_Usuario(idUsuario):
+    return usuarioClases.select_One_User(instUserClass,idUsuario)
 
 
-@users.route('/usuarios', methods=['POST'])
+@users.route('/crear_usuario', methods=['POST'])
 def crearUsuario():
-    username = request.json["username"]
-    password = request.json["password"]
-    correo = request.json["correo"]
-    pNombre = request.json["pNombre"]
-    sNombre = request.json["sNombre"]
-    pApellido = request.json["pApellido"]
-    sApellido = request.json["sApellido"]
-    numeroId = request.json["numeroId"]
-    new_usuario = Usuarios(username, password, correo,
-                           pNombre, sNombre, pApellido, sApellido, numeroId)
-    db.session.add(new_usuario)
-    db.session.commit()
-    return jsonify({'message': 'usuario guardado con exito'})
+    # username = request.json["username"]
+    # password = request.json["password"]
+    # correo = request.json["correo"]
+    # pNombre = request.json["pNombre"]
+    # sNombre = request.json["sNombre"]
+    # pApellido = request.json["pApellido"]
+    # sApellido = request.json["sApellido"]
+    # numeroId = request.json["numeroId"]
+    # new_usuario = Usuarios(username, password, correo,
+    #                        pNombre, sNombre, pApellido, sApellido, numeroId)
+    # db.session.add(new_usuario)
+    # db.session.commit()
+    # return jsonify({'message': 'usuario guardado con exito'})
+    return usuarioClases.create_usuario();
 
 
 @users.route('/editar/<idUsuario>', methods=['PUT'])
