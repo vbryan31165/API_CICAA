@@ -6,7 +6,7 @@ from model.models import Roles, Usuarios
 
 users = Blueprint('users', __name__)
 
-roles=Blueprint('roles', __name__)
+roles = Blueprint('roles', __name__)
 
 instUserClass = usuarioClases()
 instRolClass = rolesClases()
@@ -24,7 +24,7 @@ def usuarios():
 
 @users.route('/one_Usuario/<idUsuario>')
 def one_Usuario(idUsuario):
-    return usuarioClases.select_One_User(instUserClass,idUsuario)
+    return usuarioClases.select_One_User(instUserClass, idUsuario)
 
 
 @users.route('/crear_usuario', methods=['POST'])
@@ -48,7 +48,7 @@ def editarUsuario(idUsuario):
     #     usuario.numeroId = request.json["numeroId"]
     #     db.session.commit()
     #     return jsonify({'message': 'Usuario actualizado con exito'})
-        return usuarioClases.editar_usuario(instUserClass,idUsuario)
+    return usuarioClases.editar_usuario(instUserClass, idUsuario)
 
 
 @users.route('/eliminar/<idUsuario>', methods=['DELETE'])
@@ -66,10 +66,12 @@ def eliminarUsuario(idUsuario):
 def rol():
     return rolesClases.select_All_Rol(instUserClass)
 
+
 @users.route('/one_Rol/<idRol>')
 def one_rol(idRol):
-    return rolesClases.select_One_rol(instUserClass,idRol)
+    return rolesClases.select_One_rol(instUserClass, idRol)
 
-@users.route('/create_rol',methods=['POST'])
+
+@users.route('/create_rol', methods=['POST'])
 def crear_rol():
     return rolesClases.create_rol()

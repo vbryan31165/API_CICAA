@@ -44,10 +44,10 @@ class Usuarios(db.Model):
 class Roles(db.Model):
     ID_ROL = db.Column(db.Integer, primary_key=True)
     ROL = db.Column(db.String(255), nullable=False)
-    ESTADO = db.Column(db.String(255), nullable=False)
+    ESTADO = db.Column(db.Integer, nullable=False, default=1)
     FECHA_CREACION = db.Column(db.Integer, nullable=False, default=1)
 
-    def __init__(self, ID_ROL,ROL,ESTADO,FECHA_CREACION):
+    def __init__(self, ID_ROL, ROL, FECHA_CREACION):
         self.ID_ROL = ID_ROL
         self.ROL = ROL
         self.ESTADO = 1
@@ -59,4 +59,36 @@ class Roles(db.Model):
             'ROL': self.ROL,
             'ESTADO': self.ESTADO,
             'FECHA_CREACION': self.FECHA_CREACION,
+        }
+
+
+class Huella(db.Model):
+    ID = db.Column(db.Integer, primary_key=True)
+    ID_USUARIO = db.Column(db.Integer)
+    # añadir tipo de dato datatime y valor por defecto
+    FECHA_CREACION = db.Column(db.Integer, nullable=False, default=1)
+    FECHA_MODIFICACION = db.Column(db.Integer, nullable=False, default=1)
+    ESTADO = db.Column(db.Integer, nullable=False, default=1)
+
+    def getDatos(self):
+        return {
+            'ID': self.ID,
+            'ID_USUARIO': self.ID_USUARIO,
+            'FECHA_CREACION': self.FECHA_CREACION,
+            'FECHA_MODIFICACION': self.FECHA_MODIFICACION,
+            'ESTADO': self.ESTADO
+        }
+
+
+class Log_Ingresos(db.Model):
+    ID = db.Column(db.Integer, primary_key=True)
+    ID_USUARIO = db.Column(db.Integer)
+    # añadir tipo de dato datatime y valor por defecto
+    FECHA = db.Column(db.Integer, nullable=False, default=1)
+
+    def getDator(self):
+        return{
+            'ID': self.ID,
+            'ID_USUARIO': self.ID_USUARIO,
+            'FECHA': self.FECHA
         }

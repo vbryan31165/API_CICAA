@@ -13,18 +13,17 @@ class Roles():
         if request.method == 'GET':
             rol = RolesModel.query.all()
         if not rol:
-            return jsonify({'message': 'no hay usuarios'})
+            return jsonify({'message': 'no hay roles'})
         else:
             toUsers = [rol.getDatos() for rol in rol]
         return jsonify(toUsers)
 
     def select_One_rol(self, rol):
-        print("entro a funcion buscar un usuario")
         rol = RolesModel.query.filter_by(ID_ROL=rol).first()
         #usuario = UsuariosModel.query.get(id_Usuario)
         print("usuarios", rol)
         if not rol:
-            return jsonify({'message': 'Usuario not found'})
+            return jsonify({'message': 'Rol no encontrado'})
         else:
             return jsonify(RolesModel.getDatos(rol))
 
@@ -33,7 +32,7 @@ class Roles():
         new_rol = RolesModel(rol)
         db.session.add(new_rol)
         db.session.commit()
-        return jsonify({'message': 'usuario guardado con exito'})
+        return jsonify({'message': 'Rol guardado con exito'})
 
     def editar_rol(self, id_Usuario):
         usuario = RolesModel.query.get(id_Usuario)

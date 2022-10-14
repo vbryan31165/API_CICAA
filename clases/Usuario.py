@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, Blueprint
 from model.models import Usuarios as UsuariosModel, db
-from model.models import Roles
+
 
 
 class Usuario():
