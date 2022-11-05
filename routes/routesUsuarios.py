@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, Blueprint
 from clases.Usuario import Usuario as usuarioClases
 from model.models import Roles, Usuarios
 
+
 users = Blueprint('users', __name__)
 
 roles = Blueprint('roles', __name__)
@@ -12,7 +13,6 @@ instUserClass = usuarioClases()
 @users.route('/')
 def index():
     return usuarioClases.index(instUserClass)
-
 
 @users.route('/usuarios')
 def usuarios():
@@ -38,8 +38,9 @@ def uptdae_user(idUsuario):
 def eliminarUsuario(idUsuario):
     return usuarioClases.delete_user(instUserClass,idUsuario)
 
+
 @users.route('/login', methods=['POST'])
 def login():
-    hugo=request.json
-    print(hugo)
-    return usuarioClases.login(hugo)
+    data=request.json
+    print(data)
+    return usuarioClases.login(data)

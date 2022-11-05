@@ -1,9 +1,13 @@
+import datetime
 from flask import Flask, jsonify, request, Blueprint
 from model.models import Usuarios as usuariosModel, db
 import json
+import jwt
 
 
+key = 'lnf1ern0xsex'
 class Usuario():
+    
 
     def index(self):
         try:
@@ -74,21 +78,25 @@ class Usuario():
 
     def login(data):
         try:
-            # print("ola")
-            # print(type(data))
-            # user= usuariosModel(request.json)
-            # print("aqui usuario de body")
-            # print(type(user))
-            userbd = db.session.query(usuariosModel).filter(
-                usuariosModel.USUARIO == data["USUARIO"], usuariosModel.CONTRASENA == data["CONTRASENA"]).first()
-            # print("aqui usuario de body")
-            # print(userbd)
-            # print(userbd.USUARIO)
 
-            if userbd.USUARIO == data["USUARIO"]:
-                return jsonify({'message': "ok"})
+            userbd = db.session.query(usuariosModel).filter(
+                usuariosModel.CORREO == data["CORREO"], usuariosModel.CONTRASENA == data["CONTRASENA"]).first()
+            # print("aqui usuario de body")
+            print(userbd, "Respuesta")
+            # print(userbd.USUARIO)
+            
+            if userbd != None:
+                
+                token = jwt.encode({'public_id': userbd.ID_USUARIO, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, key, algorithm="HS256")
+                return jsonify({'message': "ok",
+                                'userId': userbd.ID_USUARIO,
+                                'rol': userbd.ID_ROL,
+                                'token': token,
+                                'name': userbd.USUARIO
+                                }) 
+
             else:
-                return jsonify({'message': "Usuario incorrecto - no encontrado"})
+                return jsonify({'message': "fail"})
 
         except Exception as e:
             return jsonify({'message': str(e)})
