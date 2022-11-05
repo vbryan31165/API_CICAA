@@ -13,6 +13,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 db.init_app(app)
 
+
+
 app.register_blueprint(users)
 app.register_blueprint(roles)
 app.register_blueprint(huella)
