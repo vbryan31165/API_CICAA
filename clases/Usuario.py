@@ -81,13 +81,10 @@ class Usuario():
 
             userbd = db.session.query(usuariosModel).filter(
                 usuariosModel.CORREO == data["CORREO"], usuariosModel.CONTRASENA == data["CONTRASENA"]).first()
-            # print("aqui usuario de body")
-            print(userbd, "Respuesta")
-            # print(userbd.USUARIO)
-            
+
             if userbd != None:
                 
-                token = jwt.encode({'public_id': userbd.ID_USUARIO, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, key, algorithm="HS256")
+                token = jwt.encode({'public_id': userbd.ID_USUARIO, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, key, algorithm="HS256")
                 return jsonify({'message': "ok",
                                 'userId': userbd.ID_USUARIO,
                                 'rol': userbd.ID_ROL,
