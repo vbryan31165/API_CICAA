@@ -26,18 +26,6 @@ class Usuarios(db.Model):
         self.ID_ROL = payload['ID_ROL']
         self.ESTADO = 1
 
-    # def getDatos(self):
-    #     return {
-    #         'ID_USUARIO': self.ID_USUARIO,
-    #         'CEDULA': self.CEDULA,
-    #         'NOMBRES': self.NOMBRES,
-    #         'APELLIDOS': self.APELLIDOS,
-    #         'CORREO': self.CORREO,
-    #         'USUARIO': self.USUARIO,
-    #         'CONTRASENA': self.CONTRASENA,
-    #         'ID_ROL': self.ID_ROL,
-    #         'ESTADO': self.ESTADO,
-    #     }
     def __repr__(self) -> str:
         columnas = {
             "ID_USUARIO": self.ID_USUARIO,
@@ -64,13 +52,6 @@ class Roles(db.Model):
         self.ESTADO = 1
         # self.FECHA_CREACION = FECHA_CREACION
 
-    # def getDatos(self):
-    #     return {
-    #         'ID_ROL': self.ID_ROL,
-    #         'ROL': self.ROL,
-    #         'ESTADO': self.ESTADO,
-    #         # 'FECHA_CREACION': self.FECHA_CREACION,
-    #     }
     def __repr__(self) -> str:
         columnas = {
             "ID_ROL": self.ID_ROL,
@@ -97,16 +78,23 @@ class Huella(db.Model):
             'ESTADO': self.ESTADO
         }
 
+    def __repr__(self) -> str:
+        columnas = {
+            "ID": self.ID,
+            "ID_USUARIO": self.ID_USUARIO,
+            "ESTADO": self.ESTADO
+        }
+        return json.dumps(columnas)
+
 
 class Log_Ingresos(db.Model):
     ID = db.Column(db.Integer, primary_key=True)
     ID_USUARIO = db.Column(db.Integer)
-    # añadir tipo de dato datatime y valor por defecto
     FECHA = db.Column(db.TIMESTAMP)
 
-    def getDatos(self):
-        return {
-            'ID': self.ID,
-            'ID_USUARIO': self.ID_USUARIO,
-            'FECHA': self.FECHA
+    def __repr__(self) -> str:
+        columnas = {
+            "ID": self.ID,
+            "ID_USUARIO": self.ID_USUARIO,
         }
+        return json.dumps(columnas)

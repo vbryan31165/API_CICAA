@@ -37,3 +37,9 @@ def uptdae_user(idUsuario):
 @users.route('/eliminar/<idUsuario>', methods=['POST'])
 def eliminarUsuario(idUsuario):
     return usuarioClases.delete_user(instUserClass,idUsuario)
+
+@users.route('/login', methods=['POST'])
+def login():
+    hugo=request.json
+    print(hugo)
+    return usuarioClases.login(hugo)

@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, Blueprint
-from model.models import Roles as RolesModel, db
+from model.models import Roles as rolesModel, db
 import json
 
 
@@ -12,8 +12,7 @@ class Roles():
 
         try:
             if request.method == 'GET':
-                rol = RolesModel.query.all()
-                print(rol)
+                rol = rolesModel.query.all()
             if not rol:
                 return jsonify({'message': 'no hay roles'})
             else:
@@ -23,30 +22,36 @@ class Roles():
             return jsonify({'message': str(e)})
 
     def select_One_rol(self, rol):
-        rol = RolesModel.query.filter_by(ID_ROL=rol).first()
-        #usuario = UsuariosModel.query.get(id_Usuario)
-        print("usuarios", rol)
-        if not rol:
-            return jsonify({'message': 'Rol no encontrado'})
-        else:
-            return jsonify(RolesModel.getDatos(rol))
+        try:
+            rol = rolesModel.query.filter_by(ID_ROL=rol).first()
+            #usuario = UsuariosModel.query.get(id_Usuario)
+            print("usuarios", rol)
+            if not rol:
+                return jsonify({'message': 'Rol no encontrado'})
+            else:
+                return jsonify(json.loads(str(rol)))
+        except Exception as e:
+            return jsonify({'mesage': str(e)})
 
     def create_rol():
         try:
-            new_rol = RolesModel(request.json)
+            new_rol = rolesModel(request.json)
             db.session.add(new_rol)
             db.session.commit()
             return jsonify({'message': 'Rol guardado con exito'})
         except Exception as e:
             return jsonify({'message': str(e)})
 
-    def editar_rol(self, id_Usuario):
-        usuario = RolesModel.query.get(id_Usuario)
-        if not usuario:
-            return jsonify({'message': 'Usuario not found'})
-        else:
-            # UsuariosModel.USUARIO = request.json["USUARIO"]
-            RolesModel.CORREO = request.json["CORREO"]
-            RolesModel.CEDULA = request.json["CEDULA"]
-            db.session.commit()
-            return jsonify({'message': 'Usuario actualizado con exito'})
+    def editar_rol(self, id_Rol):
+        try:
+            idRol = rolesModel.query.get(id_Rol)
+            if idRol == None:
+                return jsonify({'message': 'Rol not found'})
+            else:
+                rol = db.session.query(rolesModel).filter(
+                    rolesModel.ID_ROL == id_Rol)
+                rol.update(request.json)
+                db.session.commit()
+                return jsonify({'message': 'Usuario actualizado con exito'})
+        except Exception as e:
+            return jsonify({'message': str(e)})
