@@ -69,15 +69,6 @@ class Huella(db.Model):
     FECHA_MODIFICACION = db.Column(db.TIMESTAMP)
     ESTADO = db.Column(db.Integer, nullable=False, default=1)
 
-    def getDatos(self):
-        return {
-            'ID': self.ID,
-            'ID_USUARIO': self.ID_USUARIO,
-            'FECHA_CREACION': self.FECHA_CREACION,
-            'FECHA_MODIFICACION': self.FECHA_MODIFICACION,
-            'ESTADO': self.ESTADO
-        }
-
     def __repr__(self) -> str:
         columnas = {
             "ID": self.ID,

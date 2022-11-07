@@ -21,4 +21,4 @@ app.register_blueprint(huella)
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
+

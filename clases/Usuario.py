@@ -6,8 +6,9 @@ import jwt
 
 
 key = 'lnf1ern0xsex'
+
+
 class Usuario():
-    
 
     def index(self):
         try:
@@ -83,17 +84,16 @@ class Usuario():
                 usuariosModel.CORREO == data["CORREO"], usuariosModel.CONTRASENA == data["CONTRASENA"]).first()
 
             if userbd != None:
-                
-                token = jwt.encode({'public_id': userbd.ID_USUARIO, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, key, algorithm="HS256")
+
+                token = jwt.encode({'public_id': userbd.ID_USUARIO, 'exp': datetime.datetime.utcnow(
+                ) + datetime.timedelta(minutes=60)}, key, algorithm="HS256")
                 return jsonify({'message': "ok",
                                 'userId': userbd.ID_USUARIO,
                                 'rol': userbd.ID_ROL,
                                 'token': token,
                                 'name': userbd.USUARIO
-                                }) 
-
+                                })
             else:
                 return jsonify({'message': "fail"})
-
         except Exception as e:
             return jsonify({'message': str(e)})
