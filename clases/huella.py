@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, Blueprint
-from model.models import Huella as huellaModel, db
+from model.Huella import Huella as huellaModel
 import json
 
 
@@ -12,8 +12,7 @@ class Huella():
 
         try:
             if request.method == 'GET':
-                huella = huellaModel.query.join(Usuarios)
-                print(huella)
+                huella = huellaModel.query.all()
             if not huella:
                 return jsonify({'message': 'no hay roles'})
             else:

@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, Blueprint
-from model.models import Roles as rolesModel, db
+from model.Roles import Roles as rolesModel, db
 import json
 
 
@@ -24,8 +24,6 @@ class Roles():
     def select_One_rol(self, rol):
         try:
             rol = rolesModel.query.filter_by(ID_ROL=rol).first()
-            #usuario = UsuariosModel.query.get(id_Usuario)
-            print("usuarios", rol)
             if not rol:
                 return jsonify({'message': 'Rol no encontrado'})
             else:

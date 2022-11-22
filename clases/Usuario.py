@@ -1,7 +1,8 @@
 import datetime
 from flask import Flask, jsonify, request, Blueprint
-from model.models import Usuarios as usuariosModel, db
+from model.Usuario import Usuarios as usuariosModel
 import json
+from utils.db import db
 import jwt
 
 
@@ -19,11 +20,14 @@ class Usuario():
     def select_All_Users(self):
         try:
             if request.method == 'GET':
-                usuarios = usuariosModel.query.all()
-            if not usuarios:
+                data = []
+                usuarios = usuariosModel.query.filter_by(ID_ROL=3).all()
+            if len(usuarios) == 0:
                 return jsonify({'message': 'no hay usuarios'})
             else:
-                return jsonify(json.loads(str(usuarios)))
+                data = [{"ID_USUARIO": i.ID_USUARIO, "CEDULA": i.CEDULA, "NOMBRES": i.NOMBRES,
+                         "APELLIDOS": i.APELLIDOS, "ID_ROL": i.ID_ROL} for i in usuarios]
+                return jsonify(((data)))
         except Exception as e:
             return jsonify({"message": str(e)})
 
@@ -82,7 +86,6 @@ class Usuario():
 
             userbd = db.session.query(usuariosModel).filter(
                 usuariosModel.CORREO == data["CORREO"], usuariosModel.CONTRASENA == data["CONTRASENA"]).first()
-
             if userbd != None:
 
                 token = jwt.encode({'public_id': userbd.ID_USUARIO, 'exp': datetime.datetime.utcnow(
@@ -95,5 +98,22 @@ class Usuario():
                                 })
             else:
                 return jsonify({'message': "fail"})
+        except Exception as e:
+            return jsonify({'message': str(e)})
+
+    def informacionPerfil(data):
+        try:
+
+            userbd = db.session.query(usuariosModel).filter(
+                usuariosModel.ID_USUARIO == data["ID_USUARIO"]).first()
+            if userbd != None:
+                return jsonify({
+                    'NOMBRES': userbd.NOMBRES,
+                    'APELLIDOS': userbd.APELLIDOS,
+                    'CORREO': userbd.CORREO,
+                    'ID_ROL': userbd.ID_ROL
+                })
+            else:
+                return jsonify({'message': "!!!Error!!! no se ha encontrado el usuario"})
         except Exception as e:
             return jsonify({'message': str(e)})

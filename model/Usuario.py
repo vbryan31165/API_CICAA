@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 import json
-
-db = SQLAlchemy()
+from utils.db import db
 
 
 class Usuarios(db.Model):
@@ -41,41 +40,41 @@ class Usuarios(db.Model):
         return json.dumps(columnas)
 
 
-class Roles(db.Model):
-    ID_ROL = db.Column(db.Integer, primary_key=True)
-    ROL = db.Column(db.String(255), nullable=False)
-    ESTADO = db.Column(db.Integer, nullable=False, default=1)
-    FECHA_CREACION = db.Column(db.TIMESTAMP)
+# class Roles(db.Model):
+#     ID_ROL = db.Column(db.Integer, primary_key=True)
+#     ROL = db.Column(db.String(255), nullable=False)
+#     ESTADO = db.Column(db.Integer, nullable=False, default=1)
+#     FECHA_CREACION = db.Column(db.TIMESTAMP)
 
-    def __init__(self, payload):
-        self.ROL = payload['ROL']
-        self.ESTADO = 1
-        # self.FECHA_CREACION = FECHA_CREACION
+#     def __init__(self, payload):
+#         self.ROL = payload['ROL']
+#         self.ESTADO = 1
+#         # self.FECHA_CREACION = FECHA_CREACION
 
-    def __repr__(self) -> str:
-        columnas = {
-            "ID_ROL": self.ID_ROL,
-            "ROL": self.ROL,
-            "ESTADO": self.ESTADO,
-        }
-        return json.dumps(columnas)
+#     def __repr__(self) -> str:
+#         columnas = {
+#             "ID_ROL": self.ID_ROL,
+#             "ROL": self.ROL,
+#             "ESTADO": self.ESTADO,
+#         }
+#         return json.dumps(columnas)
 
 
-class Huella(db.Model):
-    ID = db.Column(db.Integer, primary_key=True)
-    ID_USUARIO = db.Column(db.Integer)
-    # añadir tipo de dato datatime y valor por defecto
-    FECHA_CREACION = db.Column(db.TIMESTAMP)
-    FECHA_MODIFICACION = db.Column(db.TIMESTAMP)
-    ESTADO = db.Column(db.Integer, nullable=False, default=1)
+# class Huella(db.Model):
+#     ID = db.Column(db.Integer, primary_key=True)
+#     ID_USUARIO = db.Column(db.Integer)
+#     # añadir tipo de dato datatime y valor por defecto
+#     FECHA_CREACION = db.Column(db.TIMESTAMP)
+#     FECHA_MODIFICACION = db.Column(db.TIMESTAMP)
+#     ESTADO = db.Column(db.Integer, nullable=False, default=1)
 
-    def __repr__(self) -> str:
-        columnas = {
-            "ID": self.ID,
-            "ID_USUARIO": self.ID_USUARIO,
-            "ESTADO": self.ESTADO
-        }
-        return json.dumps(columnas)
+#     def __repr__(self) -> str:
+#         columnas = {
+#             "ID": self.ID,
+#             "ID_USUARIO": self.ID_USUARIO,
+#             "ESTADO": self.ESTADO
+#         }
+#         return json.dumps(columnas)
 
 
 class Log_Ingresos(db.Model):
