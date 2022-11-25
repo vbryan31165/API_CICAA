@@ -89,7 +89,7 @@ class Usuario():
             if userbd != None:
 
                 token = jwt.encode({'public_id': userbd.ID_USUARIO, 'exp': datetime.datetime.utcnow(
-                ) + datetime.timedelta(minutes=60)}, key, algorithm="HS256")
+                ) + datetime.timedelta(minutes=45)}, key, algorithm="HS256")
                 return jsonify({'message': "ok",
                                 'userId': userbd.ID_USUARIO,
                                 'rol': userbd.ID_ROL,
