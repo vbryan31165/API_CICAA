@@ -33,7 +33,9 @@ class Roles():
 
     def create_rol():
         try:
+            print(request.json)
             new_rol = rolesModel(request.json)
+            print(type(new_rol))
             db.session.add(new_rol)
             db.session.commit()
             return jsonify({'message': 'Rol guardado con exito'})
