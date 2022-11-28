@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2022 a las 19:21:28
+-- Tiempo de generación: 28-11-2022 a las 21:21:41
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -63,56 +63,51 @@ CREATE TABLE `log_ingresos` (
 --
 
 INSERT INTO `log_ingresos` (`ID`, `ID_USUARIO`, `FECHA`, `ID_SALON`, `ESTADO`) VALUES
-(1, 5, '2022-08-06 02:47:36', 9, 0),
-(2, 4, '2022-11-26 11:43:04', 3, 0),
-(3, 2, '2022-11-14 04:00:35', 10, 1),
-(4, 2, '2022-12-13 04:11:36', 7, 0),
-(5, 3, '2022-02-16 08:41:06', 5, 1),
-(6, 6, '2022-11-10 06:18:27', 10, 0),
-(7, 1, '2022-08-26 22:37:01', 2, 0),
-(8, 3, '2022-12-06 15:04:03', 7, 1),
-(9, 5, '2022-03-13 11:04:12', 1, 1),
-(10, 1, '2022-02-08 20:38:41', 2, 1),
-(11, 5, '2022-12-03 04:29:31', 8, 0),
-(12, 1, '2022-10-17 00:50:26', 2, 0),
-(13, 4, '2022-04-20 12:38:51', 2, 0),
-(14, 5, '2022-07-15 04:39:05', 3, 1),
-(15, 6, '2022-02-01 14:01:53', 7, 1),
-(16, 3, '2022-08-07 07:49:55', 1, 0),
-(17, 2, '2022-02-08 10:05:51', 5, 1),
-(18, 1, '2022-08-10 19:39:05', 6, 0),
-(19, 3, '2022-05-18 17:04:05', 3, 0),
-(20, 4, '2022-06-11 11:49:34', 2, 0),
-(21, 3, '2022-08-08 14:30:56', 4, 1),
-(22, 5, '2022-04-22 15:39:54', 4, 0),
-(23, 5, '2022-03-13 11:32:12', 7, 0),
-(24, 1, '2022-02-23 23:48:56', 8, 0),
-(25, 6, '2022-05-07 18:30:44', 1, 0),
-(26, 2, '2022-05-26 01:41:11', 10, 0),
-(27, 3, '2022-09-28 12:17:26', 10, 1),
-(28, 4, '2022-03-13 15:52:49', 7, 1),
-(29, 1, '2022-09-05 07:47:30', 10, 0),
-(30, 5, '2022-08-07 09:04:49', 4, 1),
-(31, 4, '2022-04-17 13:04:20', 10, 1),
-(32, 4, '2022-06-10 12:43:52', 10, 1),
-(33, 2, '2022-03-05 06:26:42', 3, 1),
-(34, 5, '2022-05-13 18:05:32', 7, 0),
-(35, 5, '2022-12-06 16:34:03', 6, 0),
-(36, 1, '2022-08-23 09:11:30', 2, 1),
-(37, 6, '2022-09-28 18:27:21', 2, 1),
-(38, 1, '2022-05-20 04:59:20', 10, 1),
-(39, 5, '2022-02-01 14:50:18', 7, 0),
-(40, 5, '2022-11-27 13:15:18', 10, 1),
-(41, 6, '2022-11-06 05:50:05', 1, 1),
-(42, 2, '2022-08-10 14:17:07', 10, 0),
-(43, 6, '2022-07-24 00:09:45', 4, 1),
-(44, 6, '2022-11-19 00:14:30', 2, 1),
-(45, 2, '2022-06-19 18:21:55', 10, 1),
-(46, 2, '2022-09-01 01:16:26', 10, 1),
-(47, 3, '2022-02-10 02:44:45', 7, 1),
-(48, 6, '2022-02-03 11:25:01', 7, 1),
-(49, 5, '2022-11-08 13:21:04', 4, 1),
-(50, 6, '2022-02-07 04:02:38', 7, 0);
+(1, 3, '2022-04-20 13:07:11', 6, 1),
+(2, 6, '2022-09-12 08:08:59', 2, 0),
+(3, 2, '2022-08-10 04:57:42', 3, 0),
+(4, 1, '2022-08-12 03:06:40', 3, 0),
+(5, 1, '2022-04-12 08:17:00', 2, 0),
+(6, 5, '2022-12-23 15:31:12', 1, 0),
+(7, 1, '2022-06-03 08:54:58', 9, 1),
+(8, 1, '2022-05-12 01:23:44', 9, 0),
+(9, 5, '2022-10-12 00:36:35', 10, 0),
+(10, 5, '2022-11-23 16:01:44', 3, 1),
+(11, 1, '2022-06-16 02:08:42', 5, 0),
+(12, 4, '2022-06-08 17:55:01', 9, 1),
+(13, 6, '2022-06-23 01:30:24', 3, 0),
+(14, 1, '2022-10-19 05:41:21', 6, 1),
+(15, 3, '2022-03-25 22:33:56', 6, 0),
+(16, 4, '2022-04-24 22:35:34', 8, 1),
+(17, 6, '2022-05-06 18:10:47', 4, 1),
+(18, 5, '2022-10-15 18:58:14', 10, 0),
+(19, 5, '2022-07-09 21:01:41', 3, 1),
+(20, 5, '2022-11-13 05:06:14', 3, 1),
+(21, 2, '2022-12-03 10:38:03', 3, 0),
+(22, 6, '2022-12-30 12:32:39', 9, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE `permisos` (
+  `ID_PERMISO` int(10) NOT NULL,
+  `PERMISO` int(1) DEFAULT NULL,
+  `ID_USUARIO` int(10) DEFAULT NULL,
+  `ID_SALON` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`ID_PERMISO`, `PERMISO`, `ID_USUARIO`, `ID_SALON`) VALUES
+(1, 1, 2, 1),
+(2, 1, 4, 1),
+(3, 1, 6, 1),
+(4, 0, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -220,8 +215,8 @@ INSERT INTO `usuarios` (`ID_USUARIO`, `CEDULA`, `NOMBRES`, `APELLIDOS`, `CORREO`
 (4, '5678788', 'pedro', 'rivas', 'pedror@gmail.com', 'pedro123', 'pedro123', 2, NULL, 1, '2022-10-19 14:07:17'),
 (5, '1237890980', 'carlos', 'sanchez', 'carloss@gmail.com', 'calros123', 'carlos123', 2, NULL, 1, '2022-10-19 14:09:30'),
 (6, '2005968', 'lidia', 'zocorro', 'lidiaz@gmail.com', 'lidiaz123', 'lidia123', 2, NULL, 1, '2022-10-20 20:41:20'),
-(7, '11111', 'admin', 'cicaa', 'admin@gmail.com', 'admin', '123', 1, NULL, 1, '2022-11-21 15:35:11'),
-(8, '00000', 'soporte', 'cicaa', 'soportecicaa@gmail.com', 'soporte', '123', 1, NULL, 1, '2022-11-22 13:29:26');
+(7, '11111', 'admin', 'admin', 'admin@gmail.com', 'admin', '123', 1, NULL, 1, '2022-11-21 15:35:11'),
+(8, '00000', 'soporte', 'soporte', 'soportecicaa@gmail.com', 'soporte', '123', 1, NULL, 1, '2022-11-22 13:29:26');
 
 --
 -- Índices para tablas volcadas
@@ -240,6 +235,14 @@ ALTER TABLE `huella`
 ALTER TABLE `log_ingresos`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ID_USUARIO` (`ID_USUARIO`);
+
+--
+-- Indices de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD PRIMARY KEY (`ID_PERMISO`),
+  ADD KEY `ID_USUARIO` (`ID_USUARIO`),
+  ADD KEY `ID_SALON` (`ID_SALON`);
 
 --
 -- Indices de la tabla `reserva_salon`
@@ -283,7 +286,13 @@ ALTER TABLE `huella`
 -- AUTO_INCREMENT de la tabla `log_ingresos`
 --
 ALTER TABLE `log_ingresos`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  MODIFY `ID_PERMISO` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva_salon`
@@ -324,6 +333,13 @@ ALTER TABLE `huella`
 --
 ALTER TABLE `log_ingresos`
   ADD CONSTRAINT `log_ingresos_ibfk_1` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuarios` (`ID_USUARIO`);
+
+--
+-- Filtros para la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuarios` (`ID_USUARIO`),
+  ADD CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`ID_SALON`) REFERENCES `salones` (`ID_SALON`);
 
 --
 -- Filtros para la tabla `reserva_salon`
