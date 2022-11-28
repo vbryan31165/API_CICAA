@@ -2,6 +2,7 @@ import datetime
 from flask import Flask, jsonify, request, Blueprint
 from model.Usuario import Usuarios as usuariosModel
 from model.Roles import Roles as rolesModel
+from model.Permisos import Permisos as permisosModel
 import json
 from utils.db import db
 from utils.jwt_funciones import token as jwt_token
@@ -30,14 +31,33 @@ class Usuario():
         except Exception as e:
             return jsonify({"message": str(e)})
 
-    def select_One_User(self, id_Usuario):
+    def select_Permisos(self):
         try:
-            usuario = usuariosModel.query.filter_by(
-                ID_USUARIO=id_Usuario).first()
-            if usuario == None:
+            if request.method == "GET":
+                data = []
+                permisos = db.session.query(permisosModel.ID_PERMISO,permisosModel.ID_SALON, usuariosModel.NOMBRES, usuariosModel.ID_ROL, usuariosModel.APELLIDOS, permisosModel.PERMISO).join(
+                    permisosModel, permisosModel.ID_USUARIO == usuariosModel.ID_USUARIO).all()
+                print((permisos[2]['APELLIDOS']))
+                if len(permisos) == 0:
+                    return jsonify({'message': 'No hay permisos'})
+                else:
+                    data = [{'ID_PERMISO':i.ID_PERMISO,'ID_SALON': i.ID_SALON, 'NOMBRES': i.NOMBRES,
+                             'APELLIDOS': i.APELLIDOS, 'ID_ROL': i.ID_ROL, 'PERMISO': i.PERMISO} for i in permisos]
+                    return data
+        except Exception as e:
+            return jsonify({"message": str(e)})
+
+    def select_One_Permiso(self, id_permiso):
+        try:
+            data=[]
+            permiso = db.session.query(permisosModel.ID_PERMISO, permisosModel.ID_SALON, usuariosModel.NOMBRES, usuariosModel.APELLIDOS).join(permisosModel, permisosModel.ID_USUARIO== usuariosModel.ID_USUARIO).filter(permisosModel.ID_PERMISO==id_permiso).all()
+
+            print(permiso)
+            if permiso == None:
                 return jsonify({'message': 'Usuario not found'})
             else:
-                return jsonify(json.loads(str(usuario)))
+                data=[{'ID_PERMISO': i.ID_PERMISO}for i in permiso]
+                return jsonify(json.loads(str(permiso)))
         except Exception as e:
             return jsonify({"message": str(e)})
 
@@ -108,8 +128,8 @@ class Usuario():
             if userbd != None:
                 data_dict = {test[i]: userbd[i] for i in range(0, len(userbd))}
                 token = jwt_token(data_dict)
-                return jsonify({'message': "ok", 'token': token})
+                return jsonify({'codigo': 'ok', 'message': "Usuario validado correctamente", 'token': token})
             else:
-                return jsonify({'message': "Error usuario no encontrado, Volver a intentar"})
+                return jsonify({'codigo': 'Error', 'message': "Usuario o contraseña incorrecto"})
         except Exception as e:
             return jsonify({'message': str(e)})

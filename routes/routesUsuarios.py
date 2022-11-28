@@ -16,9 +16,9 @@ def usuarios():
     return usuarioClases.select_All_Users(instUserClass)
 
 
-@users.route('/one_Usuario/<idUsuario>')
-def one_Usuario(idUsuario):
-    return usuarioClases.select_One_User(instUserClass, idUsuario)
+@users.route('/one_permiso/<id_permiso>')
+def one_Usuario(id_permiso):
+    return usuarioClases.select_One_Permiso(instUserClass, id_permiso)
 
 
 @users.route('/crear_usuario', methods=['POST'])
@@ -46,3 +46,7 @@ def login():
 def informacionPerfil():
     data = request.json
     return usuarioClases.informacionPerfil(data)
+
+@users.route('/permisos', methods=['GET'])
+def permisos():
+    return usuarioClases.select_Permisos(instUserClass)
