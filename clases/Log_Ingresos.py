@@ -8,7 +8,6 @@ import json
 class LogIngresos():
 
     def select_All_log_month(self):
-
         try:
             if request.method == 'GET':
                 logAsistencias = db.session.query(func.monthname(logingresosModel.FECHA), func.count(
@@ -54,9 +53,7 @@ class LogIngresos():
                 'ESTADO': data[2]
             }
             new_log = logingresosModel(fecha)
-            print(new_log)
             db.session.add(new_log)
-            print("añadio")
             db.session.commit()
             return jsonify({'message': 'Registro guardado con exito'})
         except Exception as e:
@@ -67,6 +64,6 @@ class LogIngresos():
             new_log = logingresosModel(request.json)
             db.session.add(new_log)
             db.session.commit()
-            return jsonify({'message': 'usuario guardado con exito'})
+            return jsonify({'message': 'Log guardado con exito'})
         except Exception as e:
             return jsonify({'message': str(e)})

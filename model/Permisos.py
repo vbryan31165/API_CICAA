@@ -9,9 +9,9 @@ class Permisos(db.Model):
     ID_SALON = db.Column(db.Integer)
 
     def __init__(self, payload):
-        self.ID_PERMISO = payload['ID_PERMISO'],
+        # self.ID_PERMISO = payload['ID_PERMISO'],
         self.PERMISO = payload['PERMISO'],
-        self.ID_USUARIO= payload['ID_USUARIO'],
+        # self.ID_USUARIO= payload['ID_USUARIO'],
         self.ID_SALON= payload['ID_SALON']
 
 

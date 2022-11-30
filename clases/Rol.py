@@ -9,14 +9,12 @@ class Roles():
         return jsonify({'message': 'welcome'})
 
     def select_All_Rol(self):
-
         try:
             if request.method == 'GET':
                 rol = rolesModel.query.all()
             if not rol:
                 return jsonify({'message': 'no hay roles'})
             else:
-                # toUsers = [rol.getDatos() for rol in rol]
                 return jsonify(json.loads(str(rol)))
         except Exception as e:
             return jsonify({'message': str(e)})
@@ -33,9 +31,7 @@ class Roles():
 
     def create_rol():
         try:
-            print(request.json)
             new_rol = rolesModel(request.json)
-            print(type(new_rol))
             db.session.add(new_rol)
             db.session.commit()
             return jsonify({'message': 'Rol guardado con exito'})

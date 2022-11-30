@@ -8,9 +8,6 @@ secret = 'xXcicaaXx'
 
 
 def token(userbd):
-    print("aqui token")
-    print(userbd["ID_USUARIO"])
-    print(type(userbd))
     token = encode({'ID_USUARIO': userbd["ID_USUARIO"], 'CEDULA': userbd["CEDULA"], 'NOMBRES': userbd["NOMBRES"], 'APELLIDOS': userbd["APELLIDOS"], 'CORREO': userbd["CORREO"], 'ROL': userbd["ROL"], 'exp': datetime.utcnow(
     ) + timedelta(minutes=60)}, secret, algorithm="HS256")
     return token
@@ -41,10 +38,3 @@ def validate_token(token, output=False):
         response = jsonify("message", "Token expired")
         response.status_code = 400
         return response
-
-# data={'username': 'Bryan Villanueva'}
-
-# token=write_token(data)
-# print(token)
-
-# print(validate_token(token, output=True))

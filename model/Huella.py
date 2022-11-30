@@ -19,8 +19,6 @@ class Huella(db.Model):
         columnas = {
             "ID": self.ID,
             "ID_USUARIO": self.ID_USUARIO,
-            # "FECHA_CREACION": self.FECHA_CREACION,
-            # "FECHA_MODIFICACION": self.FECHA_MODIFICACION,
             "ESTADO": self.ESTADO
         }
         return json.dumps(columnas)
