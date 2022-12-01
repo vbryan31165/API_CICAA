@@ -26,9 +26,13 @@ def crearUsuario():
     return usuarioClases.create_usuario()
 
 
-@users.route('/editar_permiso/<idUsuario>', methods=['PUT'])
-def uptdae_user(idUsuario):
-    return usuarioClases.update_permiso(instUserClass, idUsuario)
+@users.route('/permisos_usuario/<idUsuario>', methods=['GET'])
+def permisos_Usuario(idUsuario):
+    return usuarioClases.select_Permisos_Usuario(instUserClass, idUsuario)
+
+@users.route('/editar_permiso', methods=['PUT'])
+def uptdae_user():
+    return usuarioClases.update_permiso(instUserClass)
 
 
 @users.route('/eliminar/<idUsuario>', methods=['POST'])

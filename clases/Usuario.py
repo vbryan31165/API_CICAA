@@ -35,14 +35,30 @@ class Usuario():
         try:
             if request.method == "GET":
                 data = []
-                permisos = db.session.query(permisosModel.ID_PERMISO, permisosModel.ID_SALON, usuariosModel.NOMBRES, usuariosModel.ID_ROL, usuariosModel.APELLIDOS, permisosModel.PERMISO).join(
+                permisos = db.session.query(permisosModel.ID_PERMISO, permisosModel.ID_USUARIO, permisosModel.ID_SALON, usuariosModel.NOMBRES, usuariosModel.ID_ROL, usuariosModel.APELLIDOS, permisosModel.PERMISO).join(
                     permisosModel, permisosModel.ID_USUARIO == usuariosModel.ID_USUARIO).all()
                 if len(permisos) == 0:
                     return jsonify({'message': 'No hay permisos'})
                 else:
-                    data = [{'ID_PERMISO': i.ID_PERMISO, 'ID_SALON': i.ID_SALON, 'NOMBRES': i.NOMBRES,
-                             'APELLIDOS': i.APELLIDOS, 'ID_ROL': i.ID_ROL, 'PERMISO': i.PERMISO} for i in permisos]
+                    data = [{'ID_PERMISO': i.ID_PERMISO, 'ID_USUARIO': i.ID_USUARIO, 'ID_SALON': i.ID_SALON, 'NOMBRES': i.NOMBRES,
+                             'APELLIDOS': i.APELLIDOS} for i in permisos]
                     return data
+        except Exception as e:
+            return jsonify({"message": str(e)})
+
+    def select_Permisos_Usuario(self, id_usuario):
+        try:
+            data = []
+            permiso = db.session.query(permisosModel.ID_PERMISO, permisosModel.PERMISO, permisosModel.ID_SALON, usuariosModel.NOMBRES, usuariosModel.APELLIDOS).join(
+                permisosModel, permisosModel.ID_USUARIO == usuariosModel.ID_USUARIO).filter(permisosModel.ID_USUARIO == id_usuario).all()
+
+            print(permiso)
+            if permiso == None:
+                return jsonify({'message': 'Usuario not found'})
+            else:
+                data = [{'ID_PERMISO': str(i.ID_PERMISO), 'NOMBRES': i.NOMBRES,
+                         'APELLIDOS': i.APELLIDOS, 'ID_SALON': str(i.ID_SALON), 'PERMISO': str(i.PERMISO)}for i in permiso]
+                return jsonify(data)
         except Exception as e:
             return jsonify({"message": str(e)})
 
@@ -52,6 +68,7 @@ class Usuario():
             permiso = db.session.query(permisosModel.ID_PERMISO, permisosModel.PERMISO, permisosModel.ID_SALON, usuariosModel.NOMBRES, usuariosModel.APELLIDOS).join(
                 permisosModel, permisosModel.ID_USUARIO == usuariosModel.ID_USUARIO).filter(permisosModel.ID_PERMISO == id_permiso).all()
 
+            print(permiso)
             if permiso == None:
                 return jsonify({'message': 'Usuario not found'})
             else:
@@ -70,17 +87,27 @@ class Usuario():
         except Exception as e:
             return jsonify({'message': str(e)})
 
-    def update_permiso(self, id_permiso):
+    def update_permiso(self):
         try:
-            idPermiso = usuariosModel.query.get(id_permiso)
+
+            permiso=request.json
+            print(permiso)
+            idPermiso = permisosModel.query.get(permiso['ID_PERMISO'])
+
+            print("id aquiiiiiiiiiiiiiii ->")
+            print(idPermiso)
 
             if idPermiso == None:
                 return jsonify({'message': 'Permiso no encontrado'})
             else:
-                permiso = db.session.query(permisosModel).filter(
-                    permisosModel.ID_PERMISO == id_permiso)
-                permiso.update(request.json)
+                idPermiso.PERMISO=permiso['PERMISO']
+                idPermiso.ID_SALON=permiso['ID_SALON']
+                db.session.add(idPermiso)
                 db.session.commit()
+                # permisobd = db.session.query(permisosModel).filter(
+                #     permisosModel.ID_PERMISO == idPermiso['ID_PERMISO'])
+                # permisobd.update(request.json)
+                # db.session.commit()
                 return jsonify({'message': 'Permiso actualizado con exito'})
         except Exception as e:
             return jsonify({'message': str(e)})

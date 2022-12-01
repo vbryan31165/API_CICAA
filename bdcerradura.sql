@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2022 a las 21:21:41
+-- Tiempo de generación: 01-12-2022 a las 05:15:56
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -104,10 +104,11 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`ID_PERMISO`, `PERMISO`, `ID_USUARIO`, `ID_SALON`) VALUES
-(1, 1, 2, 1),
+(1, 0, 2, 4),
 (2, 1, 4, 1),
 (3, 1, 6, 1),
-(4, 0, 5, 1);
+(4, 0, 5, 1),
+(5, 1, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -292,7 +293,7 @@ ALTER TABLE `log_ingresos`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `ID_PERMISO` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_PERMISO` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva_salon`
