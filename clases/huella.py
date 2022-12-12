@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, Blueprint
 from model.Huella import Huella as huellaModel
+from utils.db import db
 import json
 
 
@@ -9,7 +10,6 @@ class Huella():
         return jsonify({'message': 'welcome'})
 
     def select_All_Huella(self):
-
         try:
             if request.method == 'GET':
                 huella = huellaModel.query.all()

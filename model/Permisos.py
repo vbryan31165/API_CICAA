@@ -12,8 +12,7 @@ class Permisos(db.Model):
         # self.ID_PERMISO = payload['ID_PERMISO'],
         self.PERMISO = payload['PERMISO'],
         # self.ID_USUARIO= payload['ID_USUARIO'],
-        self.ID_SALON= payload['ID_SALON']
-
+        self.ID_SALON = payload['ID_SALON']
 
     def __repr__(self) -> str:
         columnas = {

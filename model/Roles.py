@@ -1,6 +1,7 @@
 from utils.db import db
 import json
 
+
 class Roles(db.Model):
     ID_ROL = db.Column(db.Integer, primary_key=True)
     ROL = db.Column(db.String(255), nullable=False)

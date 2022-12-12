@@ -7,13 +7,13 @@ from sqlalchemy.sql import func
 class LogIngresos(db.Model):
     ID = db.Column(db.Integer, primary_key=True)
     ID_USUARIO = db.Column(db.Integer)
-    FECHA = db.Column(db.TIMESTAMP,server_default=func.now())
+    FECHA = db.Column(db.TIMESTAMP)
     ID_SALON = db.Column(db.Integer)
     ESTADO = db.Column(db.Integer, default=0)
 
     def __init__(self, payload):
         self.ID_USUARIO = payload['ID_USUARIO'],
-        # self.FECHA = payload['FECHA'],
+        self.FECHA = payload['FECHA'],
         self.ID_SALON = payload['ID_SALON'],
         self.ESTADO = payload['ESTADO']
 
